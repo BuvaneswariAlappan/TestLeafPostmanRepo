@@ -1,0 +1,400 @@
+{
+	"info": {
+		"_postman_id": "8e1b7872-cfdc-4b74-8716-664578a6f3e3",
+		"name": "Week1Day2",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "658060"
+	},
+	"item": [
+		{
+			"name": "Create Incident",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {\r",
+							"    pm.response.to.have.status(201);\r",
+							"});\r",
+							"pm.test(\"Incident Prefix Validation\", function () {\r",
+							"    pm.expect(pm.response.text()).to.include(\"INC\");\r",
+							"});\r",
+							"var resp=pm.response.json();\r",
+							"var sys_id=resp.result.sys_id;\r",
+							"console.log(sys_id)\r",
+							"\r",
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"description\": \"First Created Via Postman\",\r\n    \"short_description\": \"Short Description Via Postman\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://dev53616.service-now.com/api/now/table/incident",
+					"protocol": "https",
+					"host": [
+						"dev53616",
+						"service-now",
+						"com"
+					],
+					"path": [
+						"api",
+						"now",
+						"table",
+						"incident"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Create Incident With XML RQ/RS",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"var jsonObject = xml2Json(responseBody);\r",
+							"var sys_id = jsonObject.response.result.sys_id;\r",
+							"console.log(sys_id)"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"protocolProfileBehavior": {
+				"disabledSystemHeaders": {
+					"accept": true,
+					"content-type": true
+				}
+			},
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/xml",
+						"type": "text"
+					},
+					{
+						"key": "Accept",
+						"value": "application/xml",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "<request>\r\n    <entry>\r\n        <short_description>XML Short Description</short_description>\r\n        <description>XML Description</description>\r\n    </entry>\r\n</request>",
+					"options": {
+						"raw": {
+							"language": "xml"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://dev53616.service-now.com/api/now/table/incident",
+					"protocol": "https",
+					"host": [
+						"dev53616",
+						"service-now",
+						"com"
+					],
+					"path": [
+						"api",
+						"now",
+						"table",
+						"incident"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Create Incident With QP",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {\r",
+							"    pm.response.to.have.status(201);\r",
+							"});\r",
+							"pm.test(\"Incident Prefix Validation\", function () {\r",
+							"    pm.expect(pm.response.text()).to.include(\"INC\");\r",
+							"});\r",
+							"var resp=pm.response.json();\r",
+							"var sys_id=resp.result.sys_id;\r",
+							"console.log(sys_id)\r",
+							"\r",
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"description\": \"First Created Via Postman\",\r\n    \"short_description\": \"Short Description Via Postman\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://dev53616.service-now.com/api/now/table/incident?sysparm_fields=short_description",
+					"protocol": "https",
+					"host": [
+						"dev53616",
+						"service-now",
+						"com"
+					],
+					"path": [
+						"api",
+						"now",
+						"table",
+						"incident"
+					],
+					"query": [
+						{
+							"key": "sysparm_fields",
+							"value": "short_description"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get All Incidents",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code for get all incidents should be 200\", function () {\r",
+							"    pm.response.to.have.status(200);\r",
+							"});\r",
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "https://dev53616.service-now.com/api/now/table/incident?sysparm_fields=contract/470af5afa9fe198101b324dd773ef379",
+					"protocol": "https",
+					"host": [
+						"dev53616",
+						"service-now",
+						"com"
+					],
+					"path": [
+						"api",
+						"now",
+						"table",
+						"incident"
+					],
+					"query": [
+						{
+							"key": "sysparm_fields",
+							"value": "contract/470af5afa9fe198101b324dd773ef379"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "GetAllIncidentsWithQueryParameter",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "https://dev53616.service-now.com/api/now/table/incident?sysparm_fields=sys_id,number,sys_updated_by&sysparm_limit=5",
+					"protocol": "https",
+					"host": [
+						"dev53616",
+						"service-now",
+						"com"
+					],
+					"path": [
+						"api",
+						"now",
+						"table",
+						"incident"
+					],
+					"query": [
+						{
+							"key": "sysparm_fields",
+							"value": "sys_id,number,sys_updated_by"
+						},
+						{
+							"key": "sysparm_limit",
+							"value": "5"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Update Incident",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 200 for update\", function () {\r",
+							"    pm.response.to.have.status(200);\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "PUT",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"short_description\": \"Updated via postman for second time checking\",\r\n    \"description\": \"Description Updated via postman for second time checking\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://dev53616.service-now.com/api/now/table/incident/9bd97f7897d9a1100e3dfed11153af4e",
+					"protocol": "https",
+					"host": [
+						"dev53616",
+						"service-now",
+						"com"
+					],
+					"path": [
+						"api",
+						"now",
+						"table",
+						"incident",
+						"9bd97f7897d9a1100e3dfed11153af4e"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Patch an Incident",
+			"request": {
+				"method": "PATCH",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"short_description\": \"Patch Short Description Incident\",\r\n    \"description\": \"Description of Patch Incident\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://dev53616.service-now.com/api/now/table/incident/46c03489a9fe19810148cd5b8cbf501e",
+					"protocol": "https",
+					"host": [
+						"dev53616",
+						"service-now",
+						"com"
+					],
+					"path": [
+						"api",
+						"now",
+						"table",
+						"incident",
+						"46c03489a9fe19810148cd5b8cbf501e"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Delete an Incident",
+			"request": {
+				"method": "DELETE",
+				"header": [],
+				"url": {
+					"raw": "https://dev53616.service-now.com/api/now/table/change_request/46f3ee0ea9fe198100c5c0e53d5abe0b",
+					"protocol": "https",
+					"host": [
+						"dev53616",
+						"service-now",
+						"com"
+					],
+					"path": [
+						"api",
+						"now",
+						"table",
+						"change_request",
+						"46f3ee0ea9fe198100c5c0e53d5abe0b"
+					]
+				}
+			},
+			"response": []
+		}
+	],
+	"auth": {
+		"type": "basic",
+		"basic": [
+			{
+				"key": "password",
+				"value": "m1NxYe1j+%KC",
+				"type": "string"
+			},
+			{
+				"key": "username",
+				"value": "admin",
+				"type": "string"
+			}
+		]
+	},
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					"pm.test(\"Response time is less than 3000 ms in collection level\", function () {",
+					"    pm.expect(pm.response.responseTime).to.be.below(3000);",
+					"});"
+				]
+			}
+		}
+	]
+}
